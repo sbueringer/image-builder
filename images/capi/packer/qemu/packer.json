@@ -11,7 +11,7 @@
     "existing_ansible_ssh_args": "{{env `ANSIBLE_SSH_ARGS`}}",
     "extra_repos": "",
     "format": "",
-    "headless": "true",
+    "headless": "false",
     "kubernetes_cni_rpm_version": null,
     "kubernetes_cni_deb_version": null,
     "kubernetes_cni_semver": null,
@@ -46,21 +46,14 @@
   },
   "builders": [
     {
-      "name": "{{user `build_name`}}",
       "vm_name": "{{build_name}}-kube-{{user `kubernetes_semver`}}",
-      "vmdk_name": "{{build_name}}",
       "output_directory": "{{user `output_dir`}}",
-      "type": "vmware-iso",
-      "version": "{{user `vmx_version`}}",
+      "type": "qemu",
       "cpus": 1,
-      "cores": 1,
       "memory": 2048,
       "disk_size": 20480,
-      "disk_type_id": "{{user `disk_type_id`}}",
-      "disk_adapter_type": "scsi",
       "boot_wait": "{{user `boot_wait`}}",
       "http_directory": "./packer/ova/linux/{{user `distro_name`}}/http/",
-      "guest_os_type": "{{user `guest_os_type`}}",
       "headless": "{{user `headless`}}",
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
@@ -75,20 +68,10 @@
         "{{user `boot_command_suffix`}}"
       ],
       "shutdown_command": "echo '{{user `ssh_password`}}' | sudo -S -E sh -c 'usermod -L {{user `ssh_username`}} && {{user `shutdown_command`}}'",
-      "skip_compaction": "{{user `skip_compaction`}}",
-      "vnc_bind_address": "{{user `vnc_bind_address`}}",
-      "vnc_port_min": "{{user `vnc_port_min`}}",
-      "vnc_port_max": "{{user `vnc_port_max`}}",
-      "remote_type": "{{user `remote_type`}}",
-      "remote_host": "{{user `remote_host`}}",
-      "remote_datastore": "{{user `remote_datastore`}}",
-      "remote_username": "{{user `remote_username`}}",
-      "remote_password": "{{user `remote_password`}}",
-      "vnc_disable_password": "{{user `vnc_disable_password`}}",
-      "format": "{{user `format`}}",
-      "vmx_data": {
-        "ethernet0.networkName": "{{user `network`}}"
-      }
+      "format": "qcow2",
+      "accelerator": "kvm",
+      "net_device": "virtio-net",
+      "disk_interface": "scsi"
     }
   ],
   "provisioners": [
