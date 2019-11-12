@@ -71,7 +71,7 @@
       "format": "qcow2",
       "accelerator": "kvm",
       "net_device": "virtio-net",
-      "disk_interface": "scsi"
+      "disk_interface": "virtio-scsi"
     }
   ],
   "provisioners": [

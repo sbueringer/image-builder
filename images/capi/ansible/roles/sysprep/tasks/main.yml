@@ -21,9 +21,9 @@
 - import_tasks: photon.yml
   when: ansible_os_family == "VMware Photon OS"
 
-#- name: set Ubuntu pw
-#  command: |-
-#    echo 'ubuntu:ubuntu' | chpasswd -c SHA512
+- name: set Ubuntu pw
+  command: |-
+    echo 'ubuntu:ubuntu' | chpasswd -c SHA512
 
 - name: Create cert dir
   file:
