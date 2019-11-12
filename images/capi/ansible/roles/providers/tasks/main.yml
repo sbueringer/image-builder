@@ -15,6 +15,9 @@
 - include_tasks: aws.yml
   when: packer_builder_type.startswith('amazon') 
 
+- include_tasks: qemu.yml
+  when: packer_builder_type | search('qemu')
+
 - include_tasks: vmware.yml
   when: packer_builder_type | search('vmware')
 
