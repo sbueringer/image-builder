@@ -51,7 +51,7 @@
       "type": "qemu",
       "cpus": 1,
       "memory": 2048,
-      "disk_size": 5480,
+      "disk_size": 10240,
       "boot_wait": "{{user `boot_wait`}}",
       "http_directory": "./packer/ova/linux/{{user `distro_name`}}/http/",
       "headless": "{{user `headless`}}",

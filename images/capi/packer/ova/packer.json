@@ -55,7 +55,7 @@
       "cpus": 1,
       "cores": 1,
       "memory": 2048,
-      "disk_size": 20480,
+      "disk_size": 10240,
       "disk_type_id": "{{user `disk_type_id`}}",
       "disk_adapter_type": "scsi",
       "boot_wait": "{{user `boot_wait`}}",
