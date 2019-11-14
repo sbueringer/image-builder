@@ -1,30 +1,47 @@
 
 # Prereqs
 
+```
 sudo apt update
 sudo apt install -y unzip make
 wget --quiet -O packer.zip https://releases.hashicorp.com/packer/1.4.3/packer_1.4.3_linux_amd64.zip  &&
     unzip packer.zip &&
     rm packer.zip &&
     sudo ln -s $PWD/packer /usr/local/bin/packer
+```
 
 (Ansible >= 2.8.5 is required)
-sudo apt install -y python ansible
+```
+sudo apt install -y python
+virtualenv --python /usr/bin/python ~/.python/ansible 
+. ~/.python/ansible/bin/activate
+pip install ansible
+```
 
+```
 sudo apt install -y qemu-system
+```
 
-# Install kvm: https://fabianlee.org/2018/10/06/kvm-creating-an-ubuntu-vm-with-console-only-access/
+## Install kvm
+https://fabianlee.org/2018/10/06/kvm-creating-an-ubuntu-vm-with-console-only-access/
 
+## checkout repo
+
+```
 mkdir ~/code
 cd ~/code
 git clone https://github.com/c445/image-builder.git
 cd image-builder
 git checkout caas
+```
 
+## build image
+```
 cd images/capi
 make build-qemu-ubuntu-1804
+```
 
-# Rerun Ansible if it fails (adjust ips):
+## Rerun Ansible if it fails (adjust ips):
 
 (Probably doesn't work exactly like this anymore)
 ````bash
