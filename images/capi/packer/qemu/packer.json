@@ -108,7 +108,7 @@
     },
     {
       "type": "shell-local",
-      "command": "./hack/image-build-vmdk.sh {{user `output_dir`}}"
+      "command": "./hack/image-build-vmdk-optimize-qcow2.sh {{user `output_dir`}}"
     }
   ]
 }
