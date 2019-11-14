@@ -17,6 +17,7 @@
   roles:
     - role: common
     - role: containerd
+    - role: docker
     - role: kubernetes
     - role: providers
     - role: sysprep
