@@ -17,6 +17,7 @@ common_rpms:
 - conntrack-tools
 - curl
 - ebtables
+- net-tools
 - nfs-utils
 - ntp
 - open-vm-tools

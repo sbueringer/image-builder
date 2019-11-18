@@ -83,6 +83,15 @@
     group: root
     mode: 0644
 
+- name: configure datasource
+  copy:
+    dest: /etc/cloud/cloud.cfg.d/99_ds.cfg
+    content: |-
+      datasource_list: [ OpenStack ]
+    owner: root
+    group: root
+    mode: 0644
+
 # Debug ds-identify & generator via log files in /run/cloud-init
 # Execute generator: /lib/systemd/system-generators/cloud-init-generator
 # Execute ds-identify: /usr/lib/cloud-init/ds-identify
@@ -92,6 +101,15 @@
     content: |-
       datasource: OpenStack
       policy: enabled,found=all,maybe=none,notfound=disabled
+    owner: root
+    group: root
+    mode: 0644
+
+# Bug see: https://bugs.launchpad.net/cloud-init/+bug/1815990
+- name: Patch Openstack Datasource
+  copy:
+    src: files/debian/DataSourceOpenStack.py
+    dest: /usr/lib/python3/dist-packages/cloudinit/sources/DataSourceOpenStack.py
     owner: root
     group: root
     mode: 0644
