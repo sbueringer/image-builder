@@ -49,8 +49,8 @@
       "vm_name": "{{build_name}}-kube-{{user `kubernetes_semver`}}",
       "output_directory": "{{user `output_dir`}}",
       "type": "qemu",
-      "cpus": 1,
-      "memory": 2048,
+      "cpus": 2,
+      "memory": 4096,
       "disk_size": 10240,
       "boot_wait": "{{user `boot_wait`}}",
       "http_directory": "./packer/ova/linux/{{user `distro_name`}}/http/",
@@ -69,7 +69,7 @@
       ],
       "shutdown_command": "echo '{{user `ssh_password`}}' | sudo -S -E sh -c 'usermod -L {{user `ssh_username`}} && {{user `shutdown_command`}}'",
       "format": "qcow2",
-      "accelerator": "kvm",
+      "accelerator": "none",
       "net_device": "virtio-net",
       "disk_interface": "virtio-scsi"
     }

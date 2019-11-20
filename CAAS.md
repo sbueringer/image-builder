@@ -16,6 +16,12 @@ sudo apt install -y python
 virtualenv --python /usr/bin/python ~/.python/ansible 
 . ~/.python/ansible/bin/activate
 pip install ansible
+
+# installed, we have some problems probably with python3, but this didn't help:
+sudo apt install --no-install-recommends --assume-yes python-apt
+
+# install for vnc viewer with shared option, can be used via e.g.: vncviewer -Shared localhost:<port>
+sudo apt install -y tigervnc-viewer
 ```
 
 ```
