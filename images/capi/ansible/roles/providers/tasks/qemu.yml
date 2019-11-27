@@ -26,16 +26,6 @@
     - cloud-initramfs-growroot
   when: ansible_os_family == "Debian"
 
-- name: Install xfsprogs
-  apt:
-    name: "{{ packages }}"
-    state: present
-    force_apt_get: yes
-  vars:
-    packages:
-    - xfsprogs
-  when: ansible_os_family == "Debian"
-
 - name: Install cloud-init packages
   yum:
     name: "{{ packages }}"

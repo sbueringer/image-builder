@@ -1,0 +1,10 @@
+---
+- name: Install custom DHC tools
+  apt:
+    name: "{{ packages }}"
+    state: present
+    force_apt_get: yes
+  vars:
+    packages:
+    - xfsprogs
+    - etcd-client
