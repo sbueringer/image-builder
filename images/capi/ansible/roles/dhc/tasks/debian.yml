@@ -4,7 +4,15 @@
     name: "{{ packages }}"
     state: present
     force_apt_get: yes
+    install_recommends: yes
   vars:
     packages:
     - xfsprogs
     - etcd-client
+    - linux-generic-hwe-18.04
+
+- name: disable apparmor
+  systemd:
+    name: apparmor
+    enabled: no
+    masked: yes
