@@ -1,0 +1,14 @@
+{
+  "build_name": "ubuntu-1910",
+  "distro_name": "ubuntu",
+  "os_display_name": "Ubuntu 19.10",
+  "guest_os_type": "ubuntu-64",
+  "iso_url": "http://releases.ubuntu.com/releases/19.10/ubuntu-19.10-live-server-amd64.iso",
+  "iso_checksum": "3fe242f4b330ead8191b3c200bcf1d8d3be4243d62fe6b866a778499370c9dbb",
+  "iso_checksum_type": "sha256",
+  "ssh_username": "ubuntu",
+  "ssh_password": "ubuntu",
+  "boot_command_prefix": "<esc><wait><esc><wait><enter><wait>/install/vmlinuz auto console-setup/ask_detect=false console-setup/layoutcode=us console-setup/modelcode=pc105 debconf/frontend=noninteractive debian-installer=en_US fb=false initrd=/install/initrd.gz kbd-chooser/method=us keyboard-configuration/layout=USA keyboard-configuration/variant=USA locale=en_US netcfg/get_domain=local netcfg/get_hostname=localhost grub-installer/bootdev=/dev/sda preseed/url=",
+  "boot_command_suffix": "/18.04/preseed.cfg -- <wait><enter><wait>",
+  "shutdown_command": "shutdown -P now"
+}

@@ -9,7 +9,7 @@
     packages:
     - xfsprogs
     - etcd-client
-    - linux-generic-hwe-18.04
+    # - linux-generic-hwe-18.04
 
 - name: disable apparmor
   systemd:

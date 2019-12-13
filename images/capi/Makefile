@@ -19,7 +19,7 @@ all: build
 
 # A list of the supported distribution/version combinations. Each member
 # of *_BUILD_NAMES must have a corresponding file "config/*_BUILD_NAME.json".
-QEMU_BUILD_NAMES ?= qemu-ubuntu-1804
+QEMU_BUILD_NAMES ?= qemu-ubuntu-1804 qemu-ubuntu-1910
 OS_BUILD_NAMES ?= os-ubuntu-1804
 OVA_BUILD_NAMES ?= ova-centos-7 ova-ubuntu-1804 ova-photon-3
 AMI_BUILD_NAMES ?= ami-default
