@@ -160,14 +160,15 @@
 # delete all files instead of remove the whole directory and recreate it
 # necessary as /var/log is a mounted fs
 - name: "Create an empty directory (locally)"
+  become: no
   local_action:
     module: file
     state: directory
-    path: "/tmp/empty"
+    path: "empty"
 
 - name: Empty /var/log
   synchronize:
-    src: /tmp/empty/
+    src: empty/
     dest: /var/log/
     delete: yes
     recursive: yes
