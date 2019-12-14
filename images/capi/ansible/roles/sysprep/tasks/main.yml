@@ -158,7 +158,7 @@
   - { path: "/home/{{ ansible_env.SUDO_USER }}/.ssh/authorized_keys" }
 
 - name: Empty /var/log
-  shell: rm -rf /car/log/*
+  shell: rm -rf /var/log/*
 
 - name: Truncate shell history
   file:
