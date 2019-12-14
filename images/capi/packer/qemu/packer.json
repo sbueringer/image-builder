@@ -53,7 +53,7 @@
       "memory": 4096,
       "disk_size": 10240,
       "boot_wait": "{{user `boot_wait`}}",
-      "http_directory": "./packer/ova/linux/{{user `distro_name`}}/http/",
+      "http_directory": "./packer/qemu/linux/{{user `distro_name`}}/http/",
       "headless": "{{user `headless`}}",
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
