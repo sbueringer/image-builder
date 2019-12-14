@@ -157,21 +157,8 @@
   - { path: /root/.ssh/authorized_keys }
   - { path: "/home/{{ ansible_env.SUDO_USER }}/.ssh/authorized_keys" }
 
-# delete all files instead of remove the whole directory and recreate it
-# necessary as /var/log is a mounted fs
-- name: "Create an empty directory (locally)"
-  become: no
-  local_action:
-    module: file
-    state: directory
-    path: "empty"
-
 - name: Empty /var/log
-  synchronize:
-    src: empty/
-    dest: /var/log/
-    delete: yes
-    recursive: yes
+  shell: rm -rf /car/log/*
 
 - name: Truncate shell history
   file:
