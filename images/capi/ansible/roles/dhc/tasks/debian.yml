@@ -30,3 +30,12 @@
     name: rsyslog
     enabled: no
     masked: yes
+
+- name: disable apparmor
+  replace:
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX=""'
+    replace: 'GRUB_CMDLINE_LINUX="apparmor=0"'
+
+- name: update grub config
+  shell: update-grub
