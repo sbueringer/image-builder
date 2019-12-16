@@ -19,6 +19,6 @@
     # - role: containerd
     - role: docker
     - role: dhc
-    - role: kubernetes
+    # - role: kubernetes
     - role: providers
     - role: sysprep
