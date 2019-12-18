@@ -19,7 +19,6 @@ common_rpms:
 - ebtables
 - net-tools
 - nfs-utils
-- ntp
 - open-vm-tools
 - python2-pip
 - python-netifaces
@@ -33,7 +32,6 @@ common_debs:
 - apt-transport-https
 - ebtables
 - socat
-- ntp
 - jq
 - nfs-client
 
