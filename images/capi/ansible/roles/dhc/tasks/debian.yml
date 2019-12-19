@@ -43,5 +43,5 @@
 - name: enable password auth via ssh
   replace:
     path: /etc/ssh/sshd_config
-    regexp: '^PasswordAuthentication .*'
+    regexp: '^#PasswordAuthentication .*'
     replace: 'PasswordAuthentication yes'
