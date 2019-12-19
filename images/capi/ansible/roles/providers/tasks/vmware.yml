@@ -107,9 +107,6 @@
 
 # Bug see: https://bugs.launchpad.net/cloud-init/+bug/1815990
 - name: Patch Openstack Datasource
-  copy:
-    src: files/debian/DataSourceOpenStack.py
+  patch:
+    src: files/debian/DataSourceOpenStack.patch
     dest: /usr/lib/python3/dist-packages/cloudinit/sources/DataSourceOpenStack.py
-    owner: root
-    group: root
-    mode: 0644
