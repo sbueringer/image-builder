@@ -39,9 +39,3 @@
 
 - name: update grub config
   shell: update-grub
-
-- name: enable password auth via ssh
-  replace:
-    path: /etc/ssh/sshd_config
-    regexp: '^#PasswordAuthentication .*'
-    replace: 'PasswordAuthentication yes'
