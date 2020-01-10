@@ -39,3 +39,13 @@
 
 - name: update grub config
   shell: update-grub
+
+- name: Creates unit file directory
+  file:
+    path: /etc/systemd/system/ssh.service.d
+    state: directory
+
+- name: Create ssh boot order drop in file
+  template:
+    dest: /etc/systemd/system/ssh.service.d/boot-order.conf
+    src: files/etc/systemd/system/ssh.service.d/boot-order.conf
