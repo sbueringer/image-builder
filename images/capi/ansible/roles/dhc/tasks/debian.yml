@@ -14,9 +14,10 @@
     - mc
     - inetutils-traceroute
     - tcptraceroute
-    - iotop
     - htop
     - atop
+    - ctop
+    - iotop
     - iftop
     - nmap
     - glances
