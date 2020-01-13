@@ -9,7 +9,17 @@
     packages:
     - xfsprogs
     - etcd-client
-    # - linux-generic-hwe-18.04
+    - screen
+    - tmux
+    - mc
+    - inetutils-traceroute
+    - tcptraceroute
+    - iotop
+    - htop
+    - atop
+    - iftop
+    - nmap
+    - glances
 
 - name: disable apparmor
   systemd:
