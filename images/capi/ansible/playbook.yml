@@ -16,8 +16,8 @@
   become: yes
   roles:
     - role: common
-    - role: containerd
-    # - role: docker
+    # - role: containerd
+    - role: docker
     - role: dhc
     # - role: kubernetes
     - role: providers
