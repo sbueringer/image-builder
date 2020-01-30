@@ -28,6 +28,37 @@
     enabled: no
     masked: yes
 
+- name: disable rsyslog because we only need systemd-journald
+  systemd:
+    name: rsyslog
+    enabled: no
+    masked: yes
+
+- name: disable atop.service
+  systemd:
+    name: atop
+    enabled: no
+
+- name: disable apt-daily.timer
+  systemd:
+    name: apt-daily.timer
+    enabled: no
+
+- name: disable apt-daily-upgrade.timer
+  systemd:
+    name: apt-daily-upgrade.timer
+    enabled: no
+
+- name: disable motd-news.timer
+  systemd:
+    name: motd-news.timer
+    enabled: no
+
+- name: disable motd-news.service
+  systemd:
+    name: motd-news.service
+    enabled: no
+
 # fix rp_filter to value 1, otherwise calico won't work.
 # see https://github.com/kubernetes-sigs/kind/issues/891
 - name: fix rp_filter in /etc/sysctl.d/10-network-security.conf
@@ -35,12 +66,6 @@
     path: /etc/sysctl.d/10-network-security.conf
     regexp: 'rp_filter=2'
     replace: 'rp_filter=1'
-
-- name: disable rsyslog because we only need systemd-journald
-  systemd:
-    name: rsyslog
-    enabled: no
-    masked: yes
 
 - name: disable apparmor
   replace:
