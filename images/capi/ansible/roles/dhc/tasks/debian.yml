@@ -15,7 +15,6 @@
     - inetutils-traceroute
     - tcptraceroute
     - htop
-    - atop
     - ctop
     - iotop
     - iftop
@@ -33,30 +32,29 @@
     enabled: no
     masked: yes
 
-- name: disable atop.service
-  systemd:
-    name: atop
-    enabled: no
-
 - name: disable apt-daily.timer
   systemd:
     name: apt-daily.timer
     enabled: no
+    masked: yes
 
 - name: disable apt-daily-upgrade.timer
   systemd:
     name: apt-daily-upgrade.timer
     enabled: no
+    masked: yes
 
 - name: disable motd-news.timer
   systemd:
     name: motd-news.timer
     enabled: no
+    masked: yes
 
 - name: disable motd-news.service
   systemd:
     name: motd-news.service
     enabled: no
+    masked: yes
 
 # fix rp_filter to value 1, otherwise calico won't work.
 # see https://github.com/kubernetes-sigs/kind/issues/891
