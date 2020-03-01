@@ -12,8 +12,7 @@ apt update && apt-get install -y \
     python-pip \
     git \
     jq \
-    rsync \
-    tigervnc-viewer
+    rsync
 
 wget --quiet -O packer.zip https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_amd64.zip \
  && unzip packer.zip \
