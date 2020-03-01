@@ -1,0 +1,13 @@
+name: CI
+
+on: [push]
+
+jobs:
+    build:
+
+        runs-on: ubuntu-18.04
+
+        steps:
+        - uses: docker://sbueringer/packer:latest
+        - name: Execute packer
+          run: ./build.sh
