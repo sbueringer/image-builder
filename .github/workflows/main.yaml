@@ -21,11 +21,6 @@ jobs:
           with:
               name: qemu-kube-v1.16.2.qcow2
               path: ./images/capi/output/ubuntu-1910-kube-v1.16.2/qemu-kube-v1.16.2.qcow2
-        - name: Upload vmdk
-          uses: actions/upload-artifact@v1
-          with:
-              name: qemu-kube-v1.16.2.vmdk
-              path: ./images/capi/output/ubuntu-1910-kube-v1.16.2/qemu-kube-v1.16.2.vmdk
         - name: Create Release
           id: create_release
           uses: actions/create-release@v1
