@@ -17,16 +17,14 @@ BUILD_VERSION="${UBUNTU_VERSION}-kube-${SHORT_SHA}-${DATE}"
 
 echo "builing image ubuntu-$BUILD_VERSION''"
 
+export PACKER_FLAGS="-debug"
 export PACKER_LOG=1
 export PACKER_LOG_PATH=/tmp/packer.log
 tail -F ${PACKER_LOG_PATH} &
 
 make "${MAKE_VERSION}"
 
-ls -la ./output/
 ls -la ./output/ubuntu-${UBUNTU_VERSION}-kube-${K8S_VERSION}/
-
-ls -la "output/ubuntu-${UBUNTU_VERSION}-kube-${K8S_VERSION}/qemu-kube-${K8S_VERSION}.qcow2"
 
 echo -e "[INFO] Version of image: ${BUILD_VERSION}\n"
 
