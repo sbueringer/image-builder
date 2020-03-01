@@ -19,10 +19,11 @@ export PACKER_LOG=1
 export PACKER_LOG_PATH=/tmp/packer.log
 tail -F ${PACKER_LOG_PATH} &
 
-#make "${MAKE_VERSION}"
+make "${MAKE_VERSION}"
 
 mkdir -p ./output/ubuntu-${UBUNTU_VERSION}-kube-${K8S_VERSION}
-echo "test" > ./output/ubuntu-${UBUNTU_VERSION}-kube-${K8S_VERSION}/qemu-kube-v1.16.2.qcow2
+echo "test.qcow2" > ./output/ubuntu-${UBUNTU_VERSION}-kube-${K8S_VERSION}/qemu-kube-v1.16.2.qcow2
+echo "test.vmdk" > ./output/ubuntu-${UBUNTU_VERSION}-kube-${K8S_VERSION}/qemu-kube-v1.16.2.vmdk
 
 ls -la ./output/ubuntu-${UBUNTU_VERSION}-kube-${K8S_VERSION}/
 
