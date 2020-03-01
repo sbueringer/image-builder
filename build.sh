@@ -19,6 +19,8 @@ export PACKER_LOG=1
 export PACKER_LOG_PATH=/tmp/packer.log
 tail -F ${PACKER_LOG_PATH} &
 
+cd ./images/capi
+
 make "${MAKE_VERSION}"
 
 ls -la ./output/ubuntu-${UBUNTU_VERSION}-kube-${K8S_VERSION}/
