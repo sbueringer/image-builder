@@ -2,9 +2,6 @@
 
 packer_version=1.4.3
 
-sudo apt-get install qemu-system-x86 qemu-kvm qemu libvirt-bin virt-manager virtinst bridge-utils cpu-checker virt-viewer
-sudo kvm-ok
-
 sudo apt update && sudo apt-get install -y \
     unzip \
     wget \

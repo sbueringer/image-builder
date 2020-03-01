@@ -13,7 +13,7 @@ jobs:
           run: ./install-prereqs.sh
         - name: Execute packer
           run: ./build.sh
-        - name: Upload math result for job 1
+        - name: Upload qcow2 image
           uses: actions/upload-artifact@v1
           with:
               name: qemu-kube-v1.16.2.qcow2
