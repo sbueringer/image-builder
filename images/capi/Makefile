@@ -49,7 +49,7 @@ $(OS_BUILD_TARGETS):
 .PHONY: $(OS_BUILD_TARGETS)
 
 $(QEMU_BUILD_TARGETS):
-	packer build $(PACKER_FLAGS) -var-file="$(abspath packer/qemu/$(subst build-,,$@).json)" packer/qemu/packer.json
+	packer build -debug $(PACKER_FLAGS) -var-file="$(abspath packer/qemu/$(subst build-,,$@).json)" packer/qemu/packer.json
 .PHONY: $(QEMU_BUILD_TARGETS)
 
 $(OVA_BUILD_TARGETS):
