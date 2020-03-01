@@ -37,7 +37,7 @@ jobs:
               draft: false
               prerelease: false
         - name: Upload qcow2
-          id: upload-release-asset
+          id: upload-release-asset-qcow2
           uses: actions/upload-release-asset@v1
           env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -47,7 +47,7 @@ jobs:
               asset_name: qemu-kube-v1.16.2.qcow2
               asset_content_type: application/zip
         - name: Upload vmdk
-          id: upload-release-asset
+          id: upload-release-asset-vmdk
           uses: actions/upload-release-asset@v1
           env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
