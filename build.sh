@@ -24,10 +24,9 @@ tail -F ${PACKER_LOG_PATH} &
 
 #make "${MAKE_VERSION}"
 
+mkdir -p ./output/ubuntu-${UBUNTU_VERSION}-kube-${K8S_VERSION}
 echo "test" > ./output/ubuntu-${UBUNTU_VERSION}-kube-${K8S_VERSION}/qemu-kube-v1.16.2.qcow2
 
 ls -la ./output/ubuntu-${UBUNTU_VERSION}-kube-${K8S_VERSION}/
 
 echo -e "[INFO] Version of image: ${BUILD_VERSION}\n"
-
-rm -rf /tmp/image-builder
