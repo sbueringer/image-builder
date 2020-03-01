@@ -17,6 +17,10 @@ BUILD_VERSION="${UBUNTU_VERSION}-kube-${SHORT_SHA}-${DATE}"
 
 echo "builing image ubuntu-$BUILD_VERSION''"
 
+export PACKER_LOG=1
+export PACKER_LOG_PATH=/tmp/packer.log
+tail -F ${PACKER_LOG_PATH} &
+
 make "${MAKE_VERSION}"
 
 ls -la ./output/
