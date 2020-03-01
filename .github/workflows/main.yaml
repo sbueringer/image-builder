@@ -34,8 +34,8 @@ jobs:
           with:
               tag_name: ${{ github.ref }}
               release_name: Release ${{ github.ref }}
-              draft: false
-              prerelease: false
+              draft: true
+              prerelease: true
         - name: Upload qcow2
           id: upload-release-asset-qcow2
           uses: actions/upload-release-asset@v1

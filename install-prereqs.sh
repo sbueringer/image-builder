@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 packer_version=1.4.3
-exit 0
+
 sudo apt update && sudo apt-get install -y \
     unzip \
     wget \
