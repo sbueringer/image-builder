@@ -12,7 +12,7 @@ SHORT_SHA="$(git rev-parse --short HEAD)"
 MAKE_VERSION="build-qemu-ubuntu-${UBUNTU_VERSION}"
 BUILD_VERSION="${UBUNTU_VERSION}-kube-${SHORT_SHA}-${DATE}"
 
-echo "builing image ubuntu-$BUILD_VERSION''"
+echo "building image ubuntu-$BUILD_VERSION''"
 
 export PACKER_FLAGS="-debug"
 export PACKER_LOG=1
