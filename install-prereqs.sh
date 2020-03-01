@@ -2,7 +2,7 @@
 
 packer_version=1.4.3
 
-apt update && apt-get install -y \
+sudo apt update && sudo apt-get install -y \
     unzip \
     wget \
     curl \
