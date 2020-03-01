@@ -20,12 +20,12 @@ jobs:
           uses: actions/upload-artifact@v1
           with:
               name: qemu-kube-v1.16.2.qcow2
-              path: ./output/ubuntu-1910-kube-v1.16.2/qemu-kube-v1.16.2.qcow2
+              path: ./images/capi/output/ubuntu-1910-kube-v1.16.2/qemu-kube-v1.16.2.qcow2
         - name: Upload vmdk
           uses: actions/upload-artifact@v1
           with:
               name: qemu-kube-v1.16.2.vmdk
-              path: ./output/ubuntu-1910-kube-v1.16.2/qemu-kube-v1.16.2.vmdk
+              path: ./images/capi/output/ubuntu-1910-kube-v1.16.2/qemu-kube-v1.16.2.vmdk
         - name: Create Release
           id: create_release
           uses: actions/create-release@v1
@@ -43,7 +43,7 @@ jobs:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
               upload_url: ${{ steps.create_release.outputs.upload_url }}
-              asset_path: ./output/ubuntu-1910-kube-v1.16.2/qemu-kube-v1.16.2.qcow2
+              asset_path: ./images/capi/output/ubuntu-1910-kube-v1.16.2/qemu-kube-v1.16.2.qcow2
               asset_name: qemu-kube-v1.16.2.qcow2
               asset_content_type: application/zip
         - name: Upload vmdk
@@ -53,6 +53,6 @@ jobs:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
               upload_url: ${{ steps.create_release.outputs.upload_url }}
-              asset_path: ./output/ubuntu-1910-kube-v1.16.2/qemu-kube-v1.16.2.vmdk
+              asset_path: ./images/capi/output/ubuntu-1910-kube-v1.16.2/qemu-kube-v1.16.2.vmdk
               asset_name: qemu-kube-v1.16.2.vmdk
               asset_content_type: application/zip
