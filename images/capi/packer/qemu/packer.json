@@ -1,6 +1,6 @@
 {
   "variables": {
-    "boot_wait": "10s",
+    "boot_wait": "30s",
     "build_timestamp": "{{timestamp}}",
     "capi_version": "v1alpha1",
     "containerd_version": null,
