@@ -1,0 +1,105 @@
+# Copyright 2019 The Kubernetes Authors.
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+
+# http://www.apache.org/licenses/LICENSE-2.0
+
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+---
+- name: Install cloud-init packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+    force_apt_get: yes
+  vars:
+    packages:
+    - cloud-init
+    - cloud-guest-utils
+    - cloud-initramfs-copymods
+    - cloud-initramfs-dyn-netconf
+    - cloud-initramfs-growroot
+  when: ansible_os_family == "Debian"
+
+- name: Install cloud-init packages
+  yum:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - cloud-init
+    - cloud-utils-growpart
+  when: ansible_os_family == "RedHat"
+
+- name: Install cloud-init and tools for VMware Photon OS
+  command: tdnf install {{ packages }} -y
+  vars:
+    packages: "cloud-init cloud-utils python3-netifaces"
+  when: ansible_os_family == "VMware Photon OS"
+
+- name: Remove cloud-init /etc/cloud/cloud.cfg.d/99-disable-networking-config.cfg
+  file:
+    path: /etc/cloud/cloud.cfg.d/99-disable-networking-config.cfg
+    state: absent
+  when: ansible_os_family == "VMware Photon OS"
+
+#- name: Unlock password
+#  replace:
+#    path: /etc/cloud/cloud.cfg
+#    regexp: '(?i)lock_passwd: True'
+#    replace: 'lock_passwd: False'
+
+- name: Symlink /usr/libexec/cloud-init to /usr/lib/cloud-init
+  file:
+    src:   /usr/libexec/cloud-init
+    dest:  /usr/lib/cloud-init
+    state: link
+  when: ansible_os_family == "RedHat"
+
+- name: configure cloud-init (for meta-data svc)
+  copy:
+    src: files/debian/cloud.cfg
+    dest: /etc/cloud/cloud.cfg
+    owner: root
+    group: root
+    mode: 0644
+
+- name: configure datasource
+  copy:
+    dest: /etc/cloud/cloud.cfg.d/99_ds.cfg
+    content: |-
+      datasource_list: [ OpenStack ]
+    owner: root
+    group: root
+    mode: 0644
+
+# Debug ds-identify & generator via log files in /run/cloud-init
+# Execute generator: /lib/systemd/system-generators/cloud-init-generator
+# Execute ds-identify: /usr/lib/cloud-init/ds-identify
+- name: configure datasource
+  copy:
+    dest: /etc/cloud/ds-identify.cfg
+    content: |-
+      datasource: OpenStack
+      policy: enabled,found=all,maybe=none,notfound=disabled
+    owner: root
+    group: root
+    mode: 0644
+
+# Bug see: https://bugs.launchpad.net/cloud-init/+bug/1815990
+- name: Patch Openstack Datasource
+  patch:
+    src: files/debian/DataSourceOpenStack.patch
+    dest: /usr/lib/python3/dist-packages/cloudinit/sources/DataSourceOpenStack.py
+
+- name: Disable Hyper-V KVP protocol daemon on Ubuntu
+  systemd:
+    name: hv-kvp-daemon
+    state: stopped
+    enabled: false
+  when: ansible_os_family == "Debian"
