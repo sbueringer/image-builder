@@ -12,4 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-d-i preseed/include string ../base/preseed.cfg
+.PHONY: serve
+serve:
+	mdbook serve

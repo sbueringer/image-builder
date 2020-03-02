@@ -1,8 +1,8 @@
-# Building Base Images
-
-This directory contains tooling for building base images for use as nodes in Kubernetes Clusters. [Packer](https://www.packer.io) is used for building these images. This tooling has been forked and extended from the [Wardroom](https://github.com/heptiolabs/wardroom) project.
+# Building Images for vSphere
 
 ## Prerequisites
+
+The `make deps-ova` target will test that Ansible and Packer are installed and available. If they are not, they will be installed to `images/capi/.bin`. This directory will need to be added to your `$PATH`.
 
 ### Hypervisor
 
@@ -19,9 +19,6 @@ The `vmware-iso` builder supports building against a remote VMware ESX server, b
 
 - [Packer](https://www.packer.io/intro/getting-started/install.html)
 - [Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html) version >= 2.8.0
-- [goss](https://github.com/YaleUniversity/packer-provisioner-goss)
-
-The program `hack/image-tools.sh` can be used to download and install the goss plug-in.
 
 ## The `cloudinit` Directory
 
@@ -35,36 +32,21 @@ For more information about how the files in the `cloudinit` directory are used, 
 
 ## Building Images
 
+From the `images/capi` directory, run `make build-ova-<OS>`, where `<OS>` is the desired operating system. The available choices are listed via `make help`.
+
 ### Configuration
 
-The `config` directory includes several JSON files that define the configuration for the images:
+In addition to the configuration found in `images/capi/packer/config`, the `ova` directory includes several JSON files that define the configuration for the images:
 
 | File | Description |
 |------|-------------|
-| `../config/kubernetes.json` | The version of Kubernetes to install |
-| `../config/cni.json` | The version of Kubernetes CNI to install |
-| `../config/containerd.json` | The version of containerd to install |
-| `../config/centos-7.json` | The settings for the CentOS 7 image |
-| `../config/ubuntu-1804.json` | The settings for the Ubuntu 1804 image |
+| `esx.json` | Additional settings needed when building on a remote ESXi host |
+| `ova-centos-7.json` | The settings for the CentOS 7 image |
+| `ova-photon-3.json` | The settings for the Photon 3 image |
+| `ova-ubuntu-1804.json` | The settings for the Ubuntu 1804 image |
 
-### Limiting Images to Build
 
-To see a list of which images may be built, use Make's tab completion:
-
-```shell
-$ make build<tab><tab>
-build              build-centos-7     build-photon-3     build-ubuntu-1804
-```
-
-### Building the Images
-
-To build the Ubuntu, CentOS and Photon images:
-
-```shell
-make
-```
-
-The images are built and located in `packer/output/BUILD_NAME+kube-KUBERNETES_VERSION`
+The images are built and located in `images/capi/output/BUILD_NAME+kube-KUBERNETES_VERSION`
 
 ## Uploading Images
 
@@ -106,11 +88,11 @@ Images may be downloaded via HTTP:
 
 #### Accessing Local VMs
 
-After the images are built, the VMs from they are built are prepped for local testing. Simply boot the VM locally with Fusion or Workstation and the machine will be initialized with cloud-init data from the `cloudinit` directory. The VMs may be accessed via SSH by using the command `hack/image-ssh.sh BUILD_DIR`.
+After the images are built, the VMs from they are built are prepped for local testing. Simply boot the VM locally with Fusion or Workstation and the machine will be initialized with cloud-init data from the `cloudinit` directory. The VMs may be accessed via SSH by using the command `hack/image-ssh.sh BUILD_DIR capv`.
 
 #### Accessing Remote VMs
 
-After deploying an image to vSphere, use `hack/image-govc-cloudinit.sh VM` to snapshot the image and update it with cloud-init data from the `cloudinit` directory. The VM may now be accessed with `ssh -i cloudinit/id_rsa.capi SSH_USER@VM_IP`.
+After deploying an image to vSphere, use `hack/image-govc-cloudinit.sh VM` to snapshot the image and update it with cloud-init data from the `cloudinit` directory. Start the VM and now it may be accessed with `ssh -i cloudinit/id_rsa.capi capv@VM_IP`.
 
 ### Initialize a CNI
 
@@ -153,8 +135,8 @@ EOF
 As a non-root user:
 
 ```shell
-curl -LO https://dl.k8s.io/$(</etc/kubernetes_community_ami_version)/kubernetes-test.tar.gz
-tar -zxvf kubernetes-test.tar.gz kubernetes/platforms/linux/amd64
-cd kubernetes/platforms/linux/amd64
+curl -LO https://dl.k8s.io/$(</etc/kubernetes-version)/kubernetes-test-linux-amd64.tar.gz
+tar -zxvf kubernetes-test-linux-amd64.tar.gz
+cd kubernetes/test/bin
 sudo ./ginkgo --nodes=8 --flakeAttempts=2 --focus="\[Conformance\]" --skip="\[Flaky\]|\[Serial\]|\[sig-network\]|Container Lifecycle Hook" ./e2e_node.test -- --k8s-bin-dir=/usr/bin --container-runtime=remote --container-runtime-endpoint unix:///var/run/containerd/containerd.sock --container-runtime-process-name /usr/local/bin/containerd --container-runtime-pid-file= --kubelet-flags="--cgroups-per-qos=true --cgroup-root=/ --runtime-cgroups=/system.slice/containerd.service" --extra-log="{\"name\": \"containerd.log\", \"journalctl\": [\"-u\", \"containerd\"]}"
 ```

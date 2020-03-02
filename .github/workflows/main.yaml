@@ -13,9 +13,9 @@ jobs:
         steps:
         - uses: actions/checkout@v1
         - name: Install prereqs
-          run: ./install-prereqs.sh
+          run: ./.github/workflows/install-prereqs.sh
         - name: Execute packer
-          run: ./build.sh
+          run: ./.github/workflows/build.sh
         - name: Create Release
           id: create_release
           uses: actions/create-release@v1

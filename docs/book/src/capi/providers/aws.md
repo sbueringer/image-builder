@@ -1,8 +1,8 @@
-# Building Base Images
-
-This directory contains tooling for building base images for use as nodes in Kubernetes Clusters. [Packer](https://www.packer.io) is used for building these images. This tooling has been forked and extended from the [Wardroom](https://github.com/heptiolabs/wardroom) project.
+# Building Images for AWS
 
 ## Prerequisites
+
+The `make deps-ami` target will test that Ansible, Packer, and Goss are installed and available. If they are not, they will be installed to `images/capi/.bin`. This directory will need to be added to your `$PATH`.
 
 ### Prerequisites for all images
 
@@ -13,10 +13,10 @@ This directory contains tooling for building base images for use as nodes in Kub
 #### Installing the goss plugin
 
 To install `packer-goss` plugin the following should be executed inside of the
-`build/amis/packer` directory:
+`images/capi` directory:
 
 ```bash
-make plugins
+make deps-ami
 ```
 
 ### Prerequisites for Amazon Web Services

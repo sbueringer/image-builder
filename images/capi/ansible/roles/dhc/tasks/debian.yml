@@ -82,3 +82,40 @@
   template:
     dest: /etc/systemd/system/ssh.service.d/boot-order.conf
     src: files/etc/systemd/system/ssh.service.d/boot-order.conf
+
+- name: set Ubuntu pw
+  command: |-
+    echo 'ubuntu:ubuntu' | chpasswd -c SHA512
+
+- name: Create cert dir
+  file:
+    state: directory
+    path: "/usr/local/share/ca-certificates/kubernetes"
+    owner: root
+    mode: "0755"
+
+- name: Copy certs
+  copy:
+    src: "files/certificates/{{ item }}"
+    dest: "/usr/local/share/ca-certificates/kubernetes/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  loop:
+  - "CorpDir.net-AMERICAS-Issuing-CA01_2018.crt"
+  - "CorpDir.net-AMERICAS-Issuing-CA02_2018.crt"
+  - "CorpDir.net-APAC-Issuing-CA01_2018.crt"
+  - "CorpDir.net-APAC-Issuing-CA02_2018.crt"
+  - "CorpDir.net-Corp-Issuing-CA01-G2_2026.crt"
+  - "CorpDir.net-Corp-Issuing-CA02-G2_2026.crt"
+  - "CorpDir.net-EMEA-Issuing-CA01_2018.crt"
+  - "CorpDir.net-EMEA-Issuing-CA02_2018.crt"
+  - "CorpDir.net-Ext-Issuing-CA01-G2_2026.crt"
+  - "CorpDir.net-Intermediate-CA01_2018.crt"
+  - "Corp-Root-CA_2021.crt"
+  - "Corp-Root-CA-G2_2036.crt"
+  - "hybridcloud-ca.crt"
+
+- name: Update ca certs
+  command: |-
+    update-ca-certificates
