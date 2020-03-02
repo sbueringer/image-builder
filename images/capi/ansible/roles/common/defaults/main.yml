@@ -18,6 +18,8 @@ common_rpms:
 - curl
 - ebtables
 - ntp
+- net-tools
+- nfs-utils
 - open-vm-tools
 - python2-pip
 - python-netifaces
@@ -26,6 +28,8 @@ common_rpms:
 - yum-utils
 
 common_debs:
+- openssh-client
+- openssh-server
 - apt-transport-https
 - conntrack
 - conntrackd
