@@ -1,0 +1,48 @@
+name: CI
+
+on:
+    push:
+        tags:
+        - 'v*'
+
+jobs:
+    build:
+
+        runs-on: ubuntu-18.04
+
+        steps:
+        - uses: actions/checkout@v1
+        - name: Install prereqs
+          run: ./.github/workflows/install-prereqs.sh
+        - name: Execute packer
+          run: ./.github/workflows/build.sh
+        - name: Create Release
+          id: create_release
+          uses: actions/create-release@v1
+          env:
+              GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          with:
+              tag_name: ${{ github.ref }}
+              release_name: Release ${{ github.ref }}
+              draft: true
+              prerelease: true
+        - name: Upload qcow2
+          id: upload-release-asset-qcow2
+          uses: actions/upload-release-asset@v1
+          env:
+              GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          with:
+              upload_url: ${{ steps.create_release.outputs.upload_url }}
+              asset_path: ./images/capi/output/ubuntu-1910-kube-v1.16.2/qemu-kube-v1.16.2.qcow2
+              asset_name: qemu-kube-v1.16.2.qcow2
+              asset_content_type: application/zip
+        - name: Upload vmdk
+          id: upload-release-asset-vmdk
+          uses: actions/upload-release-asset@v1
+          env:
+              GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          with:
+              upload_url: ${{ steps.create_release.outputs.upload_url }}
+              asset_path: ./images/capi/output/ubuntu-1910-kube-v1.16.2/qemu-kube-v1.16.2.vmdk
+              asset_name: qemu-kube-v1.16.2.vmdk
+              asset_content_type: application/zip
