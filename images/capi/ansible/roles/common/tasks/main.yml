@@ -56,19 +56,19 @@
     reload: yes
     sysctl_file: "{{ sysctl_conf_file }}"
 
-- name: Ensure net.ipv6.conf.all.forwarding sysctl is present
+- name: Ensure net.ipv6.conf.all.forwarding sysctl is present and disabled
   sysctl:
     name: net.ipv6.conf.all.forwarding
-    value: "1"
+    value: "0"
     state: present
     sysctl_set: yes
     reload: yes
     sysctl_file: "{{ sysctl_conf_file }}"
 
-- name: Ensure IPv6 is enable
+- name: Ensure IPv6 is disabled
   sysctl:
     name: net.ipv6.conf.all.disable_ipv6
-    value: "0"
+    value: "1"
     state: present
     sysctl_set: yes
     reload: yes
