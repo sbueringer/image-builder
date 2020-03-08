@@ -126,7 +126,6 @@ PLATFORMS_AND_VERSIONS	:=	$(CENTOS_VERSIONS) \
 
 OVA_BUILD_NAMES			:=	$(addprefix ova-,$(PLATFORMS_AND_VERSIONS))
 ESX_BUILD_NAMES			:=	$(addprefix esx-,$(OVA_BUILD_NAMES))
-QEMU_BUILD_NAMES        :=  qemu-ubuntu-1804 qemu-ubuntu-1910
 
 AMI_BUILD_NAMES			?=	ami-default
 GCE_BUILD_NAMES			?=	gce-default
@@ -134,16 +133,18 @@ AZURE_BUILD_NAMES		?=	azure-sig-ubuntu-1804 azure-vhd-ubuntu-1804
 
 DO_BUILD_NAMES 			?=	do-default
 
+QEMU_BUILD_NAMES        :=  qemu-ubuntu-1804 qemu-ubuntu-1910
+
 ## --------------------------------------
 ## Dynamic build targets
 ## --------------------------------------
 OVA_BUILD_TARGETS	:= $(addprefix build-,$(OVA_BUILD_NAMES))
 ESX_BUILD_TARGETS	:= $(addprefix build-,$(ESX_BUILD_NAMES))
-QEMU_BUILD_TARGETS  := $(addprefix build-,$(QEMU_BUILD_NAMES))
 AMI_BUILD_TARGETS	:= $(addprefix build-,$(AMI_BUILD_NAMES))
 GCE_BUILD_TARGETS	:= $(addprefix build-,$(GCE_BUILD_NAMES))
 AZURE_BUILD_TARGETS	:= $(addprefix build-,$(AZURE_BUILD_NAMES))
 DO_BUILD_TARGETS 	:= $(addprefix build-,$(DO_BUILD_NAMES))
+QEMU_BUILD_TARGETS	:= $(addprefix build-,$(QEMU_BUILD_NAMES))
 
 .PHONY: $(OVA_BUILD_TARGETS)
 $(OVA_BUILD_TARGETS):
@@ -152,10 +153,6 @@ $(OVA_BUILD_TARGETS):
 .PHONY: $(ESX_BUILD_TARGETS)
 $(ESX_BUILD_TARGETS):
 	packer build $(PACKER_FLAGS) -var-file="$(abspath packer/ova/$(subst build-esx-,,$@).json)" -var-file="packer/ova/esx.json" -except=shell-local $(PACKER_VAR_FILES) packer/ova/packer.json
-
-.PHONY: $(QEMU_BUILD_TARGETS)
-$(QEMU_BUILD_TARGETS):
-	packer build $(PACKER_FLAGS) -var-file="$(abspath packer/qemu/$(subst build-,,$@).json)" $(PACKER_VAR_FILES) packer/qemu/packer.json
 
 .PHONY: $(AMI_BUILD_TARGETS)
 $(AMI_BUILD_TARGETS):
@@ -172,6 +169,11 @@ $(AZURE_BUILD_TARGETS):
 $(DO_BUILD_TARGETS):
 	packer build $(PACKER_FLAGS) -var-file="$(abspath packer/digitalocean/$(subst build-,,$@).json)" $(PACKER_VAR_FILES) packer/digitalocean/packer.json
 .PHONY: $(DO_BUILD_TARGETS)
+
+$(QEMU_BUILD_TARGETS):
+	packer build $(PACKER_FLAGS) -var-file="$(abspath packer/qemu/$(subst build-,,$@).json)" $(PACKER_VAR_FILES) packer/qemu/packer.json
+.PHONY: $(QEMU_BUILD_TARGETS)
+
 
 ## --------------------------------------
 ## Dynamic clean targets
@@ -209,8 +211,8 @@ build-esx-photon-3: ## Builds Photon 3 OVA w remote hypervisor
 build-esx-ubuntu-1804: ## Builds Ubuntu 18.04 OVA w remote hypervisor
 build-esx-ubuntu-2004: ## Builds Ubuntu 20.04 OVA w remote hypervisor
 
-build-qemu-ubuntu-1804: ## Builds Ubuntu 18.04 OVA w local hypervisor
-build-qemu-ubuntu-1910: ## Builds Ubuntu 19.04 OVA w local hypervisor
+build-qemu-ubuntu-1804: ## Builds Ubuntu 18.04 QEMU image
+build-qemu-ubuntu-1910: ## Builds Ubuntu 19.04 QEMU image
 
 ## --------------------------------------
 ## Clean targets

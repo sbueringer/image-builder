@@ -18,11 +18,11 @@
 - include_tasks: azure.yml
   when: packer_builder_type.startswith('azure')
 
-- include_tasks: qemu.yml
-  when: packer_builder_type.startswith('qemu')
-
 - include_tasks: vmware.yml
   when: packer_builder_type is search('vmware')
 
 - include_tasks: googlecompute.yml
   when: packer_builder_type.startswith('googlecompute')
+
+- include_tasks: qemu.yml
+  when: packer_builder_type is search('qemu')
