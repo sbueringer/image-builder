@@ -65,6 +65,7 @@
       "qemu_binary": "{{user `qemu_binary`}}",
       "ssh_password": "{{user `ssh_password`}}",
       "ssh_username": "{{user `ssh_username`}}",
+      "ssh_timeout": "2h",
       "shutdown_command": "echo '{{user `ssh_password`}}' | sudo -S -E sh -c 'usermod -L {{user `ssh_username`}} && {{user `shutdown_command`}}'"
     }
   ],
@@ -93,7 +94,7 @@
         "build_timestamp": "{{user `build_timestamp`}}",
         "build_date": "{{isotime}}",
         "capi_version": "{{user `capi_version`}}",
-	    "format": "{{user `format`}}",
+        "format": "{{user `format`}}",
         "kubernetes_cni_semver": "{{user `kubernetes_cni_semver`}}",
         "kubernetes_semver": "{{user `kubernetes_semver`}}",
         "kubernetes_source_type": "{{user `kubernetes_source_type`}}",
@@ -105,7 +106,7 @@
     },
     {
       "type": "shell-local",
-      "command": "./hack/image-build-vmdk-optimize-qcow2.sh {{user `output_dir`}}"
+      "command": "./hack/image-build-vmdk-optimize-qcow2.sh {{user `output_directory`}} {{user `build_name`}}-kube-{{user `kubernetes_semver`}}"
     }
   ]
 }
