@@ -133,7 +133,7 @@ AZURE_BUILD_NAMES		?=	azure-sig-ubuntu-1804 azure-vhd-ubuntu-1804
 
 DO_BUILD_NAMES 			?=	do-default
 
-QEMU_BUILD_NAMES			?=	qemu-ubuntu-1804
+QEMU_BUILD_NAMES        :=  qemu-ubuntu-1804 qemu-ubuntu-1910
 
 ## --------------------------------------
 ## Dynamic build targets
@@ -212,6 +212,7 @@ build-esx-ubuntu-1804: ## Builds Ubuntu 18.04 OVA w remote hypervisor
 build-esx-ubuntu-2004: ## Builds Ubuntu 20.04 OVA w remote hypervisor
 
 build-qemu-ubuntu-1804: ## Builds Ubuntu 18.04 QEMU image
+build-qemu-ubuntu-1910: ## Builds Ubuntu 19.04 QEMU image
 
 ## --------------------------------------
 ## Clean targets
