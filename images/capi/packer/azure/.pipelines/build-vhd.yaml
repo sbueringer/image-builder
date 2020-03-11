@@ -5,7 +5,7 @@
 # - AZURE_CLIENT_ID - Service principal ID
 # - AZURE_CLIENT_SECRET - Service principal secret
 # - AZURE_SUBSCRIPTION_ID - Subscription ID used by the pipeline
-# - KUBERNETES_VERSION - version of Kubernetes to build the image with, e.g. `1.16.2`
+# - KUBERNETES_VERSION - version of Kubernetes to build the image with, e.g. `1.17.3`
 
 trigger: none
 pr: none
