@@ -46,7 +46,7 @@
       "name": "{{ user `build_name`}}",
       "vm_name": "{{user `build_name`}}-kube-{{user `kubernetes_semver`}}",
       "output_directory": "{{user `output_directory`}}",
-      "type": "qemu", 
+      "type": "qemu",
       "accelerator": "{{user `accelerator`}}",
       "cpus": "{{user `cpus`}}",
       "disk_size": "{{user `disk_size`}}",
@@ -106,6 +106,10 @@
         "iso_url": "{{user `iso_url`}}",
         "os_name": "{{user `os_display_name`}}"
       }
+    },
+    {
+      "type": "shell-local",
+      "command": "./hack/image-build-vmdk-optimize-qcow2.sh {{user `output_directory`}} {{user `build_name`}}-kube-{{user `kubernetes_semver`}}"
     }
   ]
 }
