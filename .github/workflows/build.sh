@@ -14,7 +14,7 @@ BUILD_VERSION="${UBUNTU_VERSION}-kube-${SHORT_SHA}-${DATE}"
 
 echo "building image ubuntu-$BUILD_VERSION''"
 
-export PACKER_FLAGS="-debug -var 'accelerator=none' -var 'cpus=2' -var 'disk_size=10240' -var 'memory=4096'"
+export PACKER_FLAGS="-debug -var 'accelerator=none' -var 'cpus=2' -var 'disk_size=10240' -var 'memory=6144'"
 export PACKER_LOG=1
 export PACKER_LOG_PATH=/tmp/packer.log
 tail -F ${PACKER_LOG_PATH} &
