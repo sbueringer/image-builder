@@ -28,14 +28,14 @@ jobs:
       - name: upload qcow2
         uses: actions/upload-artifact@v1
         with:
-          name: ubuntu-1910-${{ github.ref }}.qcow2
+          name: ubuntu-1910-${{ github.sha }}.qcow2
           path: ./images/capi/output/ubuntu-1910-kube-v1.17.3/ubuntu-1910-kube-v1.17.3.qcow2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: upload vmdk
         uses: actions/upload-artifact@v1
         with:
-          name: ubuntu-1910-${{ github.ref }}.vmdk
+          name: ubuntu-1910-${{ github.sha }}.vmdk
           path: ./images/capi/output/ubuntu-1910-kube-v1.17.3/ubuntu-1910-kube-v1.17.3.vmdk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
