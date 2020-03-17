@@ -69,12 +69,12 @@ openstack image create --disk-format vmdk \
   --property vmware_adaptertype="lsiLogicsas" \
   --property vmware_disktype="streamOptimized" \
   --property vmware_ostype="ubuntu64Guest" \
-  --file ./output/ubuntu-1804-kube-v1.16.2/qemu-kube-v1.16.2.vmdk ubuntu-1804-kube-v1.16.2
+  --file ./output/ubuntu-1804-kube-v1.17.3/qemu-kube-v1.17.3.vmdk ubuntu-1804-kube-v1.17.3
 
 dhc_openstack c99p005
 openstack image create --disk-format qcow2 \
   --private \
   --container-format bare \
-  --file ./output/ubuntu-1804-kube-v1.16.2/qemu-kube-v1.16.2.qcow2 ubuntu-1804-kube-v1.16.2
+  --file ./output/ubuntu-1804-kube-v1.17.3/qemu-kube-v1.17.3.qcow2 ubuntu-1804-kube-v1.17.3
 
 ```

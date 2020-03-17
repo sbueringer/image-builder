@@ -6,7 +6,7 @@ set -euo pipefail
 DATE=$(date +%Y%m%d-%H%M)
 
 UBUNTU_VERSION="1910"
-K8S_VERSION="v1.16.2"
+K8S_VERSION="v1.17.3"
 
 SHORT_SHA="$(git rev-parse --short HEAD)"
 MAKE_VERSION="build-qemu-ubuntu-${UBUNTU_VERSION}"
