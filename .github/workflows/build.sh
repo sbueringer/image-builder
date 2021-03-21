@@ -14,7 +14,22 @@ BUILD_VERSION="${UBUNTU_VERSION}-kube-${SHORT_SHA}-${DATE}"
 BUILD_DIR=./output/ubuntu-${UBUNTU_VERSION}-kube-${K8S_VERSION}/
 IMAGE_NAME=ubuntu-${UBUNTU_VERSION}-kube-${K8S_VERSION}
 
-echo "building image ubuntu-$BUILD_VERSION''"
+echo "Install prerequisites"
+
+sudo apt update && sudo apt-get install -y \
+    unzip \
+    wget \
+    curl \
+    make \
+    python3 \
+    qemu-system \
+    git \
+    jq \
+    rsync
+cd ./images/capi
+make deps-qemu
+
+echo "Building image ubuntu-$BUILD_VERSION''"
 
 export PACKER_FLAGS="-debug -var 'accelerator=none' -var 'cpus=2' -var 'disk_size=10240' -var 'memory=6144'"
 export PACKER_LOG=1
